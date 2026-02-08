@@ -5,119 +5,67 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Recipe of Kurt</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-
 <style>
 :root{
-  --blue:#A9B7C6;
-  --beige:#E6DCCF;
-  --ink:#3a2c24;
+  --cream:#F5F1EB; --beige:#E6DCCF; --sand:#C8B6A6; --blue:#A9B7C6; --ink:#3a2c24;
 }
-*{box-sizing:border-box}
-html,body{
-  margin:0;height:100%;
-  font-family:'Poppins',sans-serif;
-  background:radial-gradient(circle at top,#fff6e0,#f0e7dc,#e8ddd0);
-  overflow:hidden;
-}
+*{box-sizing:border-box;}
+html,body{margin:0;height:100%;font-family:'Poppins',sans-serif;overflow:hidden;background:radial-gradient(circle at top,#fff6e0,#f0e7dc,#e8ddd0);transition:background .4s ease}
+
 /* FLOATING EMOJIS */
 .emoji{position:fixed;font-size:28px;opacity:.35;animation:float 18s infinite ease-in-out;pointer-events:none;}
 @keyframes float{50%{transform:translateY(-60px) translateX(40px)}}
-  }
-  
+
 /* OPENING */
-#opening{
-  position:fixed; inset:0;
-  display:flex; align-items:center; justify-content:center;
-  z-index:1000;
-}
-.open-card{
-  background:rgba(255,255,255,.85);
-  padding:50px;
-  border-radius:40px;
-  text-align:center;
-  box-shadow:0 40px 120px rgba(0,0,0,.15);
-}
-.open-card h1{color:var(--ink)}
-.open-card button{
-  margin:12px; padding:16px 34px;
-  border:none; border-radius:24px;
-  font-weight:600; cursor:pointer;
-}
-.yes{background:var(--blue)}
-.no{background:var(--beige)}
+#opening{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;z-index:1000}
+.open-card{background:rgba(255,255,255,.85);padding:48px;border-radius:40px;text-align:center;
+box-shadow:0 40px 120px rgba(0,0,0,.15);animation:pop 1s ease; z-index:1001}
+.open-card h1{font-size:40px;color:var(--ink)}
+.open-card button{margin:12px;padding:16px 32px;border-radius:22px;border:none;font-weight:600;cursor:pointer}
+.yes{background:var(--blue);color:#fff}
+.no{background:var(--beige);color:#333}
 
 /* APP */
-#app{display:none; position:relative; height:100%}
+#app{display:none;height:100%;position:relative}
 
-/* CART */
-#cartWrap{
-  position:absolute;
-  top:50%; left:50%;
-  transform:translate(-50%,-50%);
-  width:200px; height:200px;
-  border-radius:50%;
-  background:linear-gradient(145deg,#fff,#e6dccf);
-  display:flex; flex-direction:column;
-  align-items:center; justify-content:center;
-  font-size:56px;
-  box-shadow:0 25px 70px rgba(0,0,0,.25);
-}
-#cartWrap span{font-size:14px}
+/* CART CENTER */
+#cartWrap{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:200px;height:200px;border-radius:50%;background:linear-gradient(145deg,#fff,#e6dccf);display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 25px 70px rgba(0,0,0,.25);font-size:56px;transition:transform .2s}
+#cartWrap span{font-size:14px;font-weight:600;color:var(--ink)}
 
-/* RING */
-#ring{
-  position:absolute;
-  top:50%; left:50%;
-  width:0; height:0;
-  transform:translate(-50%,-50%);
-  animation:spin 45s linear infinite;
-}
-@keyframes spin{
-  to{transform:translate(-50%,-50%) rotate(360deg)}
-}
-
-/* TRAITS */
+/* TRAIT RING */
+#ring{position:absolute;top:50%;left:50%;width:0;height:0;transform:translate(-50%,-50%);animation:spin 40s linear infinite; z-index:10;}
+@keyframes spin{to{transform:translate(-50%,-50%) rotate(360deg)}}
 .trait{
   position:absolute;
-  width:240px;
-  padding:18px;
+  width:240px;       /* widened traits */
+  min-height:90px;
+  padding:20px 18px;
   border-radius:28px;
   background:rgba(255,255,255,.95);
-  box-shadow:0 14px 40px rgba(0,0,0,.18);
+  box-shadow:0 12px 35px rgba(0,0,0,.18);
   text-align:center;
-  animation:counterSpin 45s linear infinite;
+  cursor:pointer;
+  transition:.4s, transform .3s;
+  backdrop-filter:blur(6px);
+  font-size:14px;
 }
-@keyframes counterSpin{
-  to{transform:translate(var(--x),var(--y)) translate(-50%,-50%) rotate(-360deg)}
-}
-.trait h4{margin:0;color:var(--ink)}
-.trait p{font-size:12px;color:#555}
+.trait:hover{transform:scale(1.15) rotate(0deg); box-shadow:0 20px 45px rgba(0,0,0,.28);}
+.trait h4{margin:0;color:var(--ink); font-size:16px;}
+.trait p{font-size:12px;color:#555; margin-top:4px;}
 
 /* REVEAL */
-#reveal{
-  position:fixed; inset:0;
-  display:none;
-  align-items:center; justify-content:center;
-}
-.reveal-card{
-  background:rgba(255,255,255,.75);
-  backdrop-filter:blur(18px);
-  padding:40px;
-  border-radius:42px;
-  display:grid;
-  grid-template-columns:1fr 1.2fr;
-  gap:30px;
-  box-shadow:0 50px 140px rgba(0,0,0,.25);
-}
-.reveal-card img{
-  width:280px;height:280px;
-  border-radius:28px;object-fit:cover;
-}
+#reveal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:100}
+.reveal-card{background:rgba(255,255,255,.7);backdrop-filter:blur(20px);
+padding:40px;border-radius:42px;display:grid;grid-template-columns:1fr 1.2fr;gap:30px;
+box-shadow:0 50px 140px rgba(0,0,0,.25);animation:pop 1.2s ease}
+.reveal-card img{width:280px;height:280px;border-radius:28px;object-fit:cover;transition:transform .3s}
+.reveal-card img:hover{transform:scale(1.05)}
 .reveal-card h1{margin:0;color:var(--ink)}
-.reveal-card p{line-height:1.7;color:#444}
+.reveal-card p{color:#444;line-height:1.7}
+
+@keyframes pop{from{transform:scale(.85);opacity:0}to{transform:scale(1);opacity:1}}
 </style>
 </head>
-
 <body>
 
 <!-- FLOATING EMOJIS -->
@@ -130,20 +78,21 @@ html,body{
 <div class="emoji" style="bottom:10%;right:40%">☁️</div>
 
 <section id="opening">
-  <div class="open-card">
-    <h1>Wanna Know What's The Recipe That Made Me?</h1>
-    <button class="yes" onclick="start()">Yes</button>
-    <button class="no" onclick="forceYes()">No</button>
-  </div>
+ <div class="open-card">
+  <h1>✨ Wanna Know What's The Recipe That Made Me? ✨<br><span style="font-size:20px;font-weight:400">Tap if you want to know what I’m really made of</span></h1>
+  <button class="yes" onclick="start()">Yes</button>
+  <button class="no" onclick="forceYes()">No</button>
+ </div>
 </section>
 
 <section id="app">
-  <div id="cartWrap">🛒<span id="count">0 traits</span></div>
-  <div id="ring"></div>
+ <div id="cartWrap">🛒<span id="count">0 traits</span></div>
+ <div id="ring"></div>
+ <button class="yes" style="position:fixed;bottom:40px;left:50%;transform:translateX(-50%)" onclick="finish()">Reveal My Recipe</button>
 </section>
 
 <section id="reveal">
-  <div class="reveal-card">
+ <div class="reveal-card">
     <img src="1000004021.png">
     <div>
       <h1>This Is Me, Kurt</h1>
@@ -153,12 +102,15 @@ I tend to overthink, not because I doubt myself entirely, but because I care abo
 When I’m passionate about something, I give it my full effort. This recipe is built from thought, feeling, and intention — and it continues to grow as I do.
       </p>
     </div>
-  </div>
+ </div>
 </section>
 
 <script>
+  let revealTimerStarted = false;
+const revealDelay = 5; // seconds
+
 const traits=[
-{name:'Calmness',desc:'I stay composed even under pressure.'},
+ {name:'Calmness',desc:'I stay composed even under pressure.'},
  {name:'Patience',desc:'I know how to wait and trust timing.'},
  {name:'Empathy',desc:'I feel emotions deeply, especially others’.'},
  {name:'Observant',desc:'I notice details people overlook.'},
@@ -167,45 +119,85 @@ const traits=[
  {name:'Overthinker',desc:'I make sure I’m doing things right.'},
  {name:'Reflective',desc:'I grow by looking back.'},
  {name:'Committed',desc:'I stay once I choose.'},
- {name:'Passionate',desc:'I give my all to what matters.'
+ {name:'Passionate',desc:'I give my all to what matters.'}
 ];
 
 const ring=document.getElementById('ring');
+const body=document.body;
 const countEl=document.getElementById('count');
+const cartWrap=document.getElementById('cartWrap');
 let count=0;
-const radius=300;
+const radius = 280; // increased radius
 
 traits.forEach((t,i)=>{
   const d=document.createElement('div');
   d.className='trait';
-  const angle=(i/traits.length)*2*Math.PI;
-  const x=Math.cos(angle)*radius;
-  const y=Math.sin(angle)*radius;
-  d.style.setProperty('--x',`${x}px`);
-  d.style.setProperty('--y',`${y}px`);
-  d.style.left='50%';
-  d.style.top='50%';
-  d.innerHTML=`<h4>${t.name}</h4><p>${t.desc}</p>`;
-  d.onclick=()=>{
-    if(d.classList.contains('used'))return;
+  const angle = (i / traits.length) * 2 * Math.PI;
+  
+  const x = Math.cos(angle) * radius;
+  const y = Math.sin(angle) * radius;
+  
+  d.style.left = '50%';
+  d.style.top = '50%';
+  d.style.transform = `translate(${x}px, ${y}px) translate(-50%, -50%) rotate(${-i*360/traits.length}deg)`;
+  
+  d.innerHTML = `<h4>${t.name}</h4><p>${t.desc}</p>`;
+  
+  d.onclick = ()=>{
+    if(d.classList.contains('used')) return;
     d.classList.add('used');
-    d.style.opacity='0';
     count++;
-    countEl.textContent=count+' traits';
-    if(count===traits.length){
-      setTimeout(()=>{app.style.display='none';reveal.style.display='flex'},3000);
-    }
-  };
-  ring.appendChild(d);
-});
+    countEl.textContent = count + ' traits';
+    
+    body.style.background='radial-gradient(circle at center,#fffbe8,#f0e7dc,#e8ddd0)';
+    setTimeout(()=>body.style.background='radial-gradient(circle at top,#fff6e0,#f0e7dc,#e8ddd0)',300);
+    
+    const rect = d.getBoundingClientRect();
+    const cartRect = cartWrap.getBoundingClientRect();
+    const clone = d.cloneNode(true);
+    clone.style.position='fixed';
+    clone.style.left = rect.left+'px';
+    clone.style.top = rect.top+'px';
+    clone.style.zIndex=9999;
+    document.body.appendChild(clone);
+    clone.animate([
+      {transform:'scale(1)', opacity:1},
+      {transform:`translate(${cartRect.left-rect.left+50}px, ${cartRect.top-rect.top+50}px) scale(.2)`, opacity:0}
+    ], {duration:700, easing:'cubic-bezier(.4,0,.2,1)'}).onfinish = ()=> clone.remove();
+    
+    d.style.opacity='0';
+    
+    cartWrap.style.transform='translate(-50%,-50%) scale(1.15)';
+    setTimeout(()=>cartWrap.style.transform='translate(-50%,-50%) scale(1)',200);
+    
+ if(count === traits.length && !revealTimerStarted){
+  revealTimerStarted = true;
 
-function start(){
-  opening.style.display='none';
-  app.style.display='block';
+  const btn = document.querySelector('#app button');
+  btn.disabled = true;
+
+  let timeLeft = revealDelay;
+  btn.textContent = `Preparing my recipe… ${timeLeft}s 🍳`;
+
+  const countdown = setInterval(() => {
+    timeLeft--;
+    btn.textContent = `Preparing my recipe… ${timeLeft}s 🍳`;
+
+    if(timeLeft <= 0){
+      clearInterval(countdown);
+      finish(); // auto-reveal
+    }
+  }, 1000);
 }
-function forceYes(){
-  document.querySelector('.no').textContent='You have no choice but to click yes';
-}
+  };
+  
+  ring.appendChild(d);
+  });
+
+  function start(){opening.style.display='none'; app.style.display='block'}
+function forceYes(){document.querySelector('.no').textContent='You have no choice but to click yes hehe 😌'}
+function finish(){app.style.display='none'; reveal.style.display='flex'}
+  
 </script>
 
 </body>
