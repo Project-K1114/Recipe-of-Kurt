@@ -35,10 +35,23 @@ box-shadow:0 40px 120px rgba(0,0,0,.15);animation:pop 1s ease; z-index:1001}
 /* TRAIT RING */
 #ring{position:absolute;top:50%;left:50%;width:0;height:0;transform:translate(-50%,-50%);animation:spin 40s linear infinite; z-index:10;}
 @keyframes spin{to{transform:translate(-50%,-50%) rotate(360deg)}}
-.trait{position:absolute;width:140px;height:auto;padding:14px;border-radius:26px;background:rgba(255,255,255,.95);box-shadow:0 10px 30px rgba(0,0,0,.15);text-align:center;cursor:pointer;transition:.4s, transform .3s;backdrop-filter:blur(6px)}
-.trait:hover{transform:scale(1.12) rotate(0deg); box-shadow:0 18px 40px rgba(0,0,0,.25);}
-.trait h4{margin:0;color:var(--ink)}
-.trait p{font-size:11px;color:#555;}
+.trait{
+  position:absolute;
+  width:180px;       /* expanded width */
+  min-height:90px;   /* taller */
+  padding:18px 16px; /* more padding */
+  border-radius:28px;
+  background:rgba(255,255,255,.95);
+  box-shadow:0 12px 35px rgba(0,0,0,.18);
+  text-align:center;
+  cursor:pointer;
+  transition:.4s, transform .3s;
+  backdrop-filter:blur(6px);
+  font-size:14px;    /* slightly larger text */
+}
+.trait:hover{transform:scale(1.15) rotate(0deg); box-shadow:0 20px 45px rgba(0,0,0,.28);}
+.trait h4{margin:0;color:var(--ink); font-size:16px;}
+.trait p{font-size:12px;color:#555; margin-top:4px;}
 
 /* REVEAL */
 #reveal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:100}
@@ -123,14 +136,13 @@ const body=document.body;
 const countEl=document.getElementById('count');
 const cartWrap=document.getElementById('cartWrap');
 let count=0;
-const radius = 120; // smaller, close to cart
+const radius = 150; // slightly closer but still clear
 
 traits.forEach((t,i)=>{
   const d=document.createElement('div');
   d.className='trait';
   const angle = (i / traits.length) * 2 * Math.PI;
   
-  // offset by half width/height for correct circle
   const x = Math.cos(angle) * radius;
   const y = Math.sin(angle) * radius;
   
@@ -175,10 +187,10 @@ traits.forEach((t,i)=>{
   ring.appendChild(d);
 });
 
-// opening/reveal functions
 function start(){opening.style.display='none'; app.style.display='block'}
 function forceYes(){document.querySelector('.no').textContent='You know you want to 😌'}
 function finish(){app.style.display='none'; reveal.style.display='flex'}
 </script>
 </body>
 </html>
+
