@@ -37,9 +37,9 @@ box-shadow:0 40px 120px rgba(0,0,0,.15);animation:pop 1s ease; z-index:1001}
 @keyframes spin{to{transform:translate(-50%,-50%) rotate(360deg)}}
 .trait{
   position:absolute;
-  width:200px;       /* slightly wider for bigger radius */
+  width:240px;       /* widened traits */
   min-height:90px;
-  padding:18px 16px;
+  padding:20px 18px;
   border-radius:28px;
   background:rgba(255,255,255,.95);
   box-shadow:0 12px 35px rgba(0,0,0,.18);
@@ -136,7 +136,7 @@ const body=document.body;
 const countEl=document.getElementById('count');
 const cartWrap=document.getElementById('cartWrap');
 let count=0;
-const radius = 200; // bigger radius
+const radius = 200; // keep radius
 
 traits.forEach((t,i)=>{
   const d=document.createElement('div');
@@ -193,3 +193,4 @@ function finish(){app.style.display='none'; reveal.style.display='flex'}
 </script>
 </body>
 </html>
+
