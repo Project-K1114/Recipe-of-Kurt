@@ -118,17 +118,7 @@ const traits=[
  {name:'Calmness',desc:'I try to stay composed under pressure.'},
  {name:'Reflective',desc:'I think deeply about my actions and choices.'},
  {name:'Kindness',desc:'I choose gentleness even when it’s hard.'},
- {name:'Hope',desc:'I believe growth is always possible.'},
- {name:'Overthinking',desc:'My mind runs endlessly, sometimes too much.'},
- {name:'Self-Doubt',desc:'I often question if I’m doing enough.'},
- {name:'Sensitivity',desc:'Small things affect me more than I admit.'},
- {name:'Fear of Failure',desc:'I’m afraid of disappointing others.'},
- {name:'Hesitation',desc:'I pause too long before acting.'},
- {name:'Emotional',desc:'My feelings influence my decisions.'},
- {name:'Insecurity',desc:'I sometimes underestimate myself.'},
- {name:'Pressure',desc:'I carry expectations quietly.'},
- {name:'Growth Mindset',desc:'I want to improve, even slowly.'},
- {name:'Self-Awareness',desc:'I recognize both my strengths and flaws.'}
+ {name:'Hope',desc:'I believe growth is always possible.'}
 ];
 
 const ring=document.getElementById('ring');
@@ -136,7 +126,7 @@ const body=document.body;
 const countEl=document.getElementById('count');
 const cartWrap=document.getElementById('cartWrap');
 let count=0;
-const radius = 200; // keep radius
+const radius = 280; // increased radius
 
 traits.forEach((t,i)=>{
   const d=document.createElement('div');
@@ -186,11 +176,8 @@ traits.forEach((t,i)=>{
   
   ring.appendChild(d);
 });
-
-function start(){opening.style.display='none'; app.style.display='block'}
-function forceYes(){document.querySelector('.no').textContent='You have no choice but to know hehe 😌'}
-function finish(){app.style.display='none'; reveal.style.display='flex'}
 </script>
+
 </body>
 </html>
 
