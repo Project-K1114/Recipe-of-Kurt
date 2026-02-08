@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Recipe of Kurt</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+ --cream:#F5F1EB;--beige:#E6DCCF;--sand:#C8B6A6;--blue:#A9B7C6;--ink:#3a2c24;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;font-family:'Poppins',sans-serif;overflow:hidden;background:radial-gradient(circle at top,#fff6e0,#f0e7dc,#e8ddd0);transition:background .4s ease}
+
+/* FLOATING EMOJIS */
+.emoji{position:fixed;font-size:28px;opacity:.35;animation:float 18s infinite ease-in-out;pointer-events:none}
+@keyframes float{50%{transform:translateY(-60px) translateX(40px)}}
+
+/* OPENING */
+#opening{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;z-index:50}
+.open-card{background:rgba(255,255,255,.65);padding:48px;border-radius:40px;text-align:center;
+box-shadow:0 40px 120px rgba(0,0,0,.15);animation:pop 1s ease}
+.open-card h1{font-size:40px;color:var(--ink)}
+.open-card button{margin:12px;padding:16px 32px;border-radius:22px;border:none;font-weight:600;cursor:pointer}
+.yes{background:var(--blue)}
+.no{background:var(--beige)}
+
+/* APP */
+#app{display:none;height:100%;position:relative}
+
+/* CART CENTER */
+#cartWrap{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:200px;height:200px;border-radius:50%;background:linear-gradient(145deg,#fff,#e6dccf);display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 25px 70px rgba(0,0,0,.25);font-size:56px}
+#cartWrap span{font-size:14px;font-weight:600;color:var(--ink)}
+
+/* TRAIT RING */
+#ring{position:absolute;top:50%;left:50%;width:700px;height:700px;transform:translate(-50%,-50%);animation:spin 60s linear infinite}
+@keyframes spin{to{transform:translate(-50%,-50%) rotate(360deg)}}
+#ring:hover{animation-play-state:paused}}
+.trait{position:absolute;width:200px;padding:18px;border-radius:26px;background:rgba(255,255,255,.85);box-shadow:0 14px 40px rgba(0,0,0,.18);text-align:center;cursor:pointer;transition:.4s;backdrop-filter:blur(6px)}
+.trait:hover{transform:scale(1.08)}
+.trait h4{margin:0;color:var(--ink)}
+.trait p{font-size:12px;color:#555}
+
+/* REVEAL */
+#reveal{position:fixed;inset:0;display:none;align-items:center;justify-content:center}
+.reveal-card{background:rgba(255,255,255,.7);backdrop-filter:blur(20px);
+padding:40px;border-radius:42px;display:grid;grid-template-columns:1fr 1.2fr;gap:30px;
+box-shadow:0 50px 140px rgba(0,0,0,.25);animation:pop 1.2s ease}
+.reveal-card img{width:280px;height:280px;border-radius:28px;object-fit:cover}
+.reveal-card h1{margin:0;color:var(--ink)}
+.reveal-card p{color:#444;line-height:1.7}
+
+@keyframes pop{from{transform:scale(.85);opacity:0}to{transform:scale(1);opacity:1}}
+</style>
+</head>
+<body>
+
+<!-- FLOATING EMOJIS -->
+<div class="emoji" style="top:8%;left:12%">🧠</div>
+<div class="emoji" style="top:18%;right:18%">💭</div>
+<div class="emoji" style="top:30%;left:70%">📘</div>
+<div class="emoji" style="bottom:20%;left:15%">💙</div>
+<div class="emoji" style="bottom:25%;right:22%">🌱</div>
+<div class="emoji" style="top:55%;right:10%">✨</div>
+<div class="emoji" style="bottom:10%;right:40%">☁️</div>
+
+<section id="opening">
+ <div class="open-card">
+  <h1>✨ The Recipe That Made Me ✨<br><span style="font-size:20px;font-weight:400">Tap if you want to know what I’m really made of</span></h1>
+  <button class="yes" onclick="start()">Yes</button>
+  <button class="no" onclick="forceYes()">No</button>
+ </div>
+</section>
+
+<section id="app">
+ <div id="cartWrap">🛒<span id="count">0 traits</span></div>
+ <div id="ring"></div>
+ <button class="yes" style="position:fixed;bottom:40px;left:50%;transform:translateX(-50%)" onclick="finish()">Reveal My Recipe</button>
+</section>
+
+<section id="reveal">
+ <div class="reveal-card">
+  <img src="1000004021.png">
+  <div>
+   <h1>And This Is Me, Kurt</h1>
+   <p>
+I am Kurt — someone shaped by patience, emotion, and constant reflection. I tend to listen more than I speak, and I often carry thoughts longer than I should. I care deeply, sometimes to the point where it becomes heavy, but that same depth allows me to understand people beyond what they show.
+<br><br>
+I am not perfect. I overthink, hesitate, and doubt myself more often than I want to admit. I feel pressure silently and struggle with fear of failure. But those imperfections are not weaknesses to me — they are reminders that I am human and still growing.
+<br><br>
+Every experience, every choice, and every mistake adds another ingredient to who I am becoming. I value meaning over attention, sincerity over noise, and growth over comfort. This recipe is not final — it is still being written, and I am learning to accept every part of it.
+</p>
+  </div>
+ </div>
+</section>
+
+<script>
+const traits=[
+ {name:'Patience',desc:'I know how to wait, even when things feel uncertain.'},
+ {name:'Empathy',desc:'I feel emotions deeply, especially other people’s.'},
+ {name:'Curiosity',desc:'I constantly want to understand how and why.'},
+ {name:'Loyalty',desc:'Once I care, I stay committed.'},
+ {name:'Resilience',desc:'I always find a way to stand back up.'},
+ {name:'Creativity',desc:'I express myself through ideas and imagination.'},
+ {name:'Calmness',desc:'I try to stay composed under pressure.'},
+ {name:'Reflective',desc:'I think deeply about my actions and choices.'},
+ {name:'Kindness',desc:'I choose gentleness even when it’s hard.'},
+ {name:'Hope',desc:'I believe growth is always possible.'},
+ {name:'Overthinking',desc:'My mind runs endlessly, sometimes too much.'},
+ {name:'Self-Doubt',desc:'I often question if I’m doing enough.'},
+ {name:'Sensitivity',desc:'Small things affect me more than I admit.'},
+ {name:'Fear of Failure',desc:'I’m afraid of disappointing others.'},
+ {name:'Hesitation',desc:'I pause too long before acting.'},
+ {name:'Emotional',desc:'My feelings influence my decisions.'},
+ {name:'Insecurity',desc:'I sometimes underestimate myself.'},
+ {name:'Pressure',desc:'I carry expectations quietly.'},
+ {name:'Growth Mindset',desc:'I want to improve, even slowly.'},
+ {name:'Self-Awareness',desc:'I recognize both my strengths and flaws.'}
+];
+
+const ring=document.getElementById('ring');
+const body=document.body;
+const countEl=document.getElementById('count');
+let count=0;
+
+traits.forEach((t,i)=>{
+ const d=document.createElement('div');d.className='trait';
+ const angle=(i/traits.length)*360;
+ d.style.transform=`rotate(${angle}deg) translate(300px) rotate(-${angle}deg)`;(${angle}deg) translate(200px) rotate(-${angle}deg)`;
+ d.innerHTML=`<h4>${t.name}</h4><p>${t.desc}</p>`;
+ d.onclick=()=>{
+ if(d.classList.contains('used'))return;
+ d.classList.add('used');
+ count++;
+ countEl.textContent=count+' traits';
+
+ // background pulse
+ body.style.background='radial-gradient(circle at center,#fffbe8,#f0e7dc,#e8ddd0)';
+ setTimeout(()=>body.style.background='radial-gradient(circle at top,#fff6e0,#f0e7dc,#e8ddd0)',300);
+
+ // fly to cart
+ const rect=d.getBoundingClientRect();
+ const cart=document.getElementById('cartWrap').getBoundingClientRect();
+ const clone=d.cloneNode(true);
+ clone.style.position='fixed';
+ clone.style.left=rect.left+'px';
+ clone.style.top=rect.top+'px';
+ clone.style.zIndex=99;
+ document.body.appendChild(clone);
+ clone.animate([
+  {transform:'scale(1)',opacity:1},
+  {transform:`translate(${cart.left-rect.left+50}px,${cart.top-rect.top+50}px) scale(.2)`,opacity:0}
+ ],{duration:700,easing:'cubic-bezier(.4,0,.2,1)'}).onfinish=()=>clone.remove();
+
+ d.style.opacity='0';
+};
+ ring.appendChild(d);
+});
+
+function start(){opening.style.display='none';app.style.display='block'}
+function forceYes(){document.querySelector('.no').textContent='You know you want to 😌'}
+function finish(){
+ app.style.display='none';
+ reveal.style.display='flex';
+}
+
+</script>
+</body>
+</html>
