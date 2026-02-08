@@ -19,7 +19,11 @@ html,body{
   background:radial-gradient(circle at top,#fff6e0,#f0e7dc,#e8ddd0);
   overflow:hidden;
 }
-
+/* FLOATING EMOJIS */
+.emoji{position:fixed;font-size:28px;opacity:.35;animation:float 18s infinite ease-in-out;pointer-events:none;}
+@keyframes float{50%{transform:translateY(-60px) translateX(40px)}}
+  }
+  
 /* OPENING */
 #opening{
   position:fixed; inset:0;
@@ -116,6 +120,15 @@ html,body{
 
 <body>
 
+<!-- FLOATING EMOJIS -->
+<div class="emoji" style="top:8%;left:12%">🧠</div>
+<div class="emoji" style="top:18%;right:18%">💭</div>
+<div class="emoji" style="top:30%;left:70%">📘</div>
+<div class="emoji" style="bottom:20%;left:15%">💙</div>
+<div class="emoji" style="bottom:25%;right:22%">🌱</div>
+<div class="emoji" style="top:55%;right:10%">✨</div>
+<div class="emoji" style="bottom:10%;right:40%">☁️</div>
+
 <section id="opening">
   <div class="open-card">
     <h1>Wanna Know What's The Recipe That Made Me?</h1>
@@ -145,7 +158,7 @@ When I’m passionate about something, I give it my full effort. This recipe is 
 
 <script>
 const traits=[
- {name:'Calmness',desc:'I stay composed even under pressure.'},
+{name:'Calmness',desc:'I stay composed even under pressure.'},
  {name:'Patience',desc:'I know how to wait and trust timing.'},
  {name:'Empathy',desc:'I feel emotions deeply, especially others’.'},
  {name:'Observant',desc:'I notice details people overlook.'},
@@ -154,7 +167,7 @@ const traits=[
  {name:'Overthinker',desc:'I make sure I’m doing things right.'},
  {name:'Reflective',desc:'I grow by looking back.'},
  {name:'Committed',desc:'I stay once I choose.'},
- {name:'Passionate',desc:'I give my all to what matters.'}
+ {name:'Passionate',desc:'I give my all to what matters.'
 ];
 
 const ring=document.getElementById('ring');
