@@ -37,9 +37,9 @@ box-shadow:0 40px 120px rgba(0,0,0,.15);animation:pop 1s ease; z-index:1001}
 @keyframes spin{to{transform:translate(-50%,-50%) rotate(360deg)}}
 .trait{
   position:absolute;
-  width:180px;       /* expanded width */
-  min-height:90px;   /* taller */
-  padding:18px 16px; /* more padding */
+  width:200px;       /* slightly wider for bigger radius */
+  min-height:90px;
+  padding:18px 16px;
   border-radius:28px;
   background:rgba(255,255,255,.95);
   box-shadow:0 12px 35px rgba(0,0,0,.18);
@@ -47,7 +47,7 @@ box-shadow:0 40px 120px rgba(0,0,0,.15);animation:pop 1s ease; z-index:1001}
   cursor:pointer;
   transition:.4s, transform .3s;
   backdrop-filter:blur(6px);
-  font-size:14px;    /* slightly larger text */
+  font-size:14px;
 }
 .trait:hover{transform:scale(1.15) rotate(0deg); box-shadow:0 20px 45px rgba(0,0,0,.28);}
 .trait h4{margin:0;color:var(--ink); font-size:16px;}
@@ -136,7 +136,7 @@ const body=document.body;
 const countEl=document.getElementById('count');
 const cartWrap=document.getElementById('cartWrap');
 let count=0;
-const radius = 150; // slightly closer but still clear
+const radius = 200; // bigger radius
 
 traits.forEach((t,i)=>{
   const d=document.createElement('div');
@@ -193,4 +193,3 @@ function finish(){app.style.display='none'; reveal.style.display='flex'}
 </script>
 </body>
 </html>
-
