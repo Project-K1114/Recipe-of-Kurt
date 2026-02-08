@@ -1,52 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Recipe of Kurt</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
- --cream:#F5F1EB;--beige:#E6DCCF;--sand:#C8B6A6;--blue:#A9B7C6;--ink:#3a2c24;
+  --cream:#F5F1EB; --beige:#E6DCCF; --sand:#C8B6A6; --blue:#A9B7C6; --ink:#3a2c24;
 }
-*{box-sizing:border-box}
+*{box-sizing:border-box;}
 html,body{margin:0;height:100%;font-family:'Poppins',sans-serif;overflow:hidden;background:radial-gradient(circle at top,#fff6e0,#f0e7dc,#e8ddd0);transition:background .4s ease}
 
 /* FLOATING EMOJIS */
-.emoji{position:fixed;font-size:28px;opacity:.35;animation:float 18s infinite ease-in-out;pointer-events:none}
+.emoji{position:fixed;font-size:28px;opacity:.35;animation:float 18s infinite ease-in-out;pointer-events:none;}
 @keyframes float{50%{transform:translateY(-60px) translateX(40px)}}
 
 /* OPENING */
-#opening{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;z-index:50}
-.open-card{background:rgba(255,255,255,.65);padding:48px;border-radius:40px;text-align:center;
-box-shadow:0 40px 120px rgba(0,0,0,.15);animation:pop 1s ease}
+#opening{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;z-index:1000}
+.open-card{background:rgba(255,255,255,.85);padding:48px;border-radius:40px;text-align:center;
+box-shadow:0 40px 120px rgba(0,0,0,.15);animation:pop 1s ease; z-index:1001}
 .open-card h1{font-size:40px;color:var(--ink)}
 .open-card button{margin:12px;padding:16px 32px;border-radius:22px;border:none;font-weight:600;cursor:pointer}
-.yes{background:var(--blue)}
-.no{background:var(--beige)}
+.yes{background:var(--blue);color:#fff}
+.no{background:var(--beige);color:#333}
 
 /* APP */
 #app{display:none;height:100%;position:relative}
 
 /* CART CENTER */
-#cartWrap{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:200px;height:200px;border-radius:50%;background:linear-gradient(145deg,#fff,#e6dccf);display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 25px 70px rgba(0,0,0,.25);font-size:56px}
+#cartWrap{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:200px;height:200px;border-radius:50%;background:linear-gradient(145deg,#fff,#e6dccf);display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 25px 70px rgba(0,0,0,.25);font-size:56px;transition:transform .2s}
 #cartWrap span{font-size:14px;font-weight:600;color:var(--ink)}
 
 /* TRAIT RING */
-#ring{position:absolute;top:50%;left:50%;width:700px;height:700px;transform:translate(-50%,-50%);animation:spin 60s linear infinite}
+#ring{position:absolute;top:50%;left:50%;width:700px;height:700px;transform:translate(-50%,-50%);animation:spin 60s linear infinite; z-index:10}
 @keyframes spin{to{transform:translate(-50%,-50%) rotate(360deg)}}
-#ring:hover{animation-play-state:paused}}
-.trait{position:absolute;width:200px;padding:18px;border-radius:26px;background:rgba(255,255,255,.85);box-shadow:0 14px 40px rgba(0,0,0,.18);text-align:center;cursor:pointer;transition:.4s;backdrop-filter:blur(6px)}
-.trait:hover{transform:scale(1.08)}
+.trait{position:absolute;width:180px;padding:16px;border-radius:26px;background:rgba(255,255,255,.95);box-shadow:0 10px 30px rgba(0,0,0,.15);text-align:center;cursor:pointer;transition:.4s, transform .3s;backdrop-filter:blur(6px)}
+.trait:hover{transform:scale(1.12) rotate(0deg); box-shadow:0 18px 40px rgba(0,0,0,.25);}
 .trait h4{margin:0;color:var(--ink)}
 .trait p{font-size:12px;color:#555}
 
 /* REVEAL */
-#reveal{position:fixed;inset:0;display:none;align-items:center;justify-content:center}
+#reveal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:100}
 .reveal-card{background:rgba(255,255,255,.7);backdrop-filter:blur(20px);
 padding:40px;border-radius:42px;display:grid;grid-template-columns:1fr 1.2fr;gap:30px;
 box-shadow:0 50px 140px rgba(0,0,0,.25);animation:pop 1.2s ease}
-.reveal-card img{width:280px;height:280px;border-radius:28px;object-fit:cover}
+.reveal-card img{width:280px;height:280px;border-radius:28px;object-fit:cover;transition:transform .3s}
+.reveal-card img:hover{transform:scale(1.05)}
 .reveal-card h1{margin:0;color:var(--ink)}
 .reveal-card p{color:#444;line-height:1.7}
 
@@ -124,13 +124,13 @@ const countEl=document.getElementById('count');
 const cartWrap=document.getElementById('cartWrap');
 let count=0;
 
-const radius = 300; // distance from cart
+const radius = 200; // smaller so traits are visible
 
 traits.forEach((t,i)=>{
   const d = document.createElement('div');
   d.className='trait';
   
-  // calculate x,y using circle math
+  // circle math
   const angle = (i / traits.length) * 2 * Math.PI;
   const x = Math.cos(angle) * radius;
   const y = Math.sin(angle) * radius;
@@ -147,11 +147,9 @@ traits.forEach((t,i)=>{
     count++;
     countEl.textContent = count + ' traits';
     
-    // background pulse
     body.style.background='radial-gradient(circle at center,#fffbe8,#f0e7dc,#e8ddd0)';
     setTimeout(()=>body.style.background='radial-gradient(circle at top,#fff6e0,#f0e7dc,#e8ddd0)',300);
     
-    // fly to cart
     const rect = d.getBoundingClientRect();
     const cartRect = cartWrap.getBoundingClientRect();
     const clone = d.cloneNode(true);
@@ -167,11 +165,9 @@ traits.forEach((t,i)=>{
     
     d.style.opacity='0';
     
-    // cart bounce
     cartWrap.style.transform='translate(-50%,-50%) scale(1.15)';
     setTimeout(()=>cartWrap.style.transform='translate(-50%,-50%) scale(1)',200);
     
-    // update reveal button if all traits selected
     if(count === traits.length){
       document.querySelector('#app button').textContent='See All My Ingredients 🍽️';
     }
@@ -180,7 +176,7 @@ traits.forEach((t,i)=>{
   ring.appendChild(d);
 });
 
-// Opening and reveal functions
+// functions
 function start(){opening.style.display='none'; app.style.display='block'}
 function forceYes(){document.querySelector('.no').textContent='You know you want to 😌'}
 function finish(){app.style.display='none'; reveal.style.display='flex'}
@@ -188,3 +184,4 @@ function finish(){app.style.display='none'; reveal.style.display='flex'}
 
 </body>
 </html>
+
